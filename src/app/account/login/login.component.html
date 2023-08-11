@@ -1,0 +1,62 @@
+<h1>login works!</h1>
+
+<div class="container col-md-6 offset-md-3 mt-5">
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  <div class="card">
+    <h4 class="card-header">Login</h4>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-control" formControlName="username">
+          <div *ngIf="submitted && form.controls['username'].hasError('required')" class="text-danger">
+            Username is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password">
+          <div *ngIf="submitted && form.controls['password'].hasError('required')" class="text-danger">
+            Password is required.
+          </div>
+        </div>
+
+        <div>
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Login
+          </button>
+          <a routerLink="../register" class="btn btn-link">Register</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--<div class="container-fluid">-->
+<!--  <form (ngSubmit)="loginForm()" #emailForm="ngForm" class="container">-->
+<!--    &lt;!&ndash;  Email &#45;&#45; alert user if invalid email format and email is required &ndash;&gt;-->
+<!--    <div>-->
+<!--      <label for="email">Email Address:</label> <br>-->
+<!--      <input type="email" id="email" [(ngModel)]="userEmail" name="userEmail" width="150px" required email #email="ngModel">-->
+<!--      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">-->
+<!--        <div *ngIf="email.errors?.['required']">Email is required.</div>-->
+<!--        <div *ngIf="email.errors?.['email']">Invalid email format.</div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;  password &#45;&#45; alert user first name is required&ndash;&gt;-->
+<!--    <div>-->
+<!--      <label for="password">password:</label> <br>-->
+<!--      <input type="text" id="password" [(ngModel)]="userPassword" name="userPassword" required #password="ngModel">-->
+<!--      <div *ngIf="(password.dirty || password.touched)" class="error-message">-->
+<!--        <div *ngIf="password.errors?.['required']">Password is required.</div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <button type="submit" [disabled]="emailForm.invalid">Sign In</button>-->
+<!--  </form>-->
+<!--</div>-->
