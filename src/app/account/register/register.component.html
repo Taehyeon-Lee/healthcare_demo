@@ -9,34 +9,35 @@
 
         <div class="mb-3">
           <label class="form-label">First Name</label>
-          <input type="text" class="form-control" formControlName="firstname">
-          <div *ngIf="submitted && form.controls['firstname'].hasError('required')" class="text-danger">
+          <input type="text" class="form-control" formControlName="first_name">
+          <div *ngIf="submitted && form.controls['first_name'].hasError('required')" class="text-danger">
             Username is required.
           </div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Last Name</label>
-          <input type="password" class="form-control" formControlName="lastname">
-          <div *ngIf="submitted && form.controls['lastname'].hasError('required')" class="text-danger">
+          <input type="text" class="form-control" formControlName="last_name">
+          <div *ngIf="submitted && form.controls['last_name'].hasError('required')" class="text-danger">
             Password is required.
           </div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Username</label>
-          <input type="text" class="form-control" formControlName="username">
-          <div *ngIf="submitted && form.controls['username'].hasError('required')" class="text-danger">
+          <input type="text" class="form-control" formControlName="u_name">
+          <div *ngIf="submitted && form.controls['u_name'].hasError('required')" class="text-danger">
             Username is required.
           </div>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Password</label>
-          <input type="password" class="form-control" formControlName="password">
-          <div *ngIf="submitted && form.controls['password'].hasError('required')" class="text-danger">
+          <input type="password" class="form-control" formControlName="u_password">
+          <div *ngIf="submitted && form.controls['u_password'].hasError('required')" class="text-danger">
             Password is required.
           </div>
+
         </div>
 
         <div>

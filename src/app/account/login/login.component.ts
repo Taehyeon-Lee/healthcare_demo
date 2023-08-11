@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../service/auth.service";
+import {Router} from "@angular/router";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -26,12 +29,14 @@ export class LoginComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    // private accountService: AccountService
+    private authService: AuthService,
+    private router: Router
   ) {
+    console.log(this.authService.userValue);
     // redirect to home if already logged in
-    // if (this.accountService.userValue) {
-    //   this.router.navigate(['/']);
-    // }
+    if (this.authService.userValue) {
+      this.router.navigate(['/user/profile']);
+    }
   }
 
   ngOnInit() {
@@ -56,6 +61,20 @@ export class LoginComponent implements OnInit{
     }
 
     this.loading = true;
+
+    this.authService.login(this.f['username'].value, this.f['password'].value).pipe(first())
+      .subscribe({
+        next: () => {
+          // get return url from query parameters or default to home page
+          const returnUrl = '/user/profile'; // this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+          console.log(this.authService.userValue);
+        },
+        error: error => {
+          this.error = error;
+          this.loading = false;
+        }
+      });
   }
 
 }

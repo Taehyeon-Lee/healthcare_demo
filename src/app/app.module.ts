@@ -9,6 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent, RegisterComponent } from './account';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { ProfileComponent } from './profile/profile.component';
+import { NgChartsModule } from 'ng2-charts';
+import {GlucoseGraphComponent} from "./profile/graphs/glucose.level.component";
+import {BPressureGraphComponent} from "./profile/graphs/blood.pressure.component";
 
 
 @NgModule({
@@ -18,14 +22,19 @@ import { HttpClientModule } from "@angular/common/http";
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent,
+    GlucoseGraphComponent,
+    BPressureGraphComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

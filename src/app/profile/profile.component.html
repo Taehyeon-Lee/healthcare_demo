@@ -1,0 +1,28 @@
+<p>profile works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 bg-light sidebar d-flex flex-column">
+      <div class="text-center mt-3">
+        <h4>Welcome, {{ curUser?.first_name }} {{ curUser?.last_name }}</h4>
+        <p>Username: {{ curUser?.u_name }}</p>
+      </div>
+      <div class="mt-auto text-center">
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
+      </div>
+    </div>
+    <div class="col-md-9 d-flex flex-column">
+      <!-- Graphs section -->
+      <div class="mt-4 d-flex">
+        <div class="flex-grow-1 text-center">
+          <h4>Blood Glucose Level</h4>
+          <glucose-line-graph></glucose-line-graph>
+        </div>
+      </div>
+      <div class="mt-4 d-flex">
+        <div class="flex-grow-1 text-center">
+          <h4>Blood Pressure</h4>
+          <blood-pressure-graph></blood-pressure-graph>
+        </div>
+    </div>
+  </div>
+</div>
