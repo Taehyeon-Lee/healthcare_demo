@@ -6,7 +6,7 @@ import { User } from '../../service/user.model';
 @Component({
   selector: 'glucose-line-graph',
   template: `
-    <div style="display: block">
+    <div style="display: block" *ngIf="lineChartLabels.length > 0">
       <canvas baseChart
         [datasets]="lineChartData"
         [labels]="lineChartLabels"

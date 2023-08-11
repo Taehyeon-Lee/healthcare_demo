@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
 import { User } from '../../service/user.model';
@@ -6,12 +6,13 @@ import { User } from '../../service/user.model';
 @Component({
   selector: 'blood-pressure-graph',
   template: `
-    <div style="display: block">
+    <div style="display: block" *ngIf="barChartLabels.length > 0">
       <canvas baseChart
         [datasets]="barChartData"
         [labels]="barChartLabels"
         [options]="barChartOptions"
         [legend]="barChartLegend"
+        [type]="'bar'"
         >
       </canvas>
     </div>
@@ -39,6 +40,8 @@ export class BPressureGraphComponent implements OnInit {
     this.curUser = this.authService.userValue;
   }
 
+
+
   ngOnInit() {
     // You can fetch your data and update the chart data here
     const url = 'http://localhost:3000/healthStats/' + this.curUser?.uid;
@@ -46,7 +49,6 @@ export class BPressureGraphComponent implements OnInit {
       this.http.get(url).subscribe({
         next: (res: any) => {
           res.forEach((element: any) => {
-            console.log(element)
             const dateObj = new Date(element.date);
             const formattedDate = dateObj.toISOString().split('T')[0];
 
@@ -58,8 +60,6 @@ export class BPressureGraphComponent implements OnInit {
           console.log(error);
         }
       });
-      console.log(this.barChartData);
-      console.log(this.barChartLabels);
     } catch (error) {
       console.log(error);
     }
