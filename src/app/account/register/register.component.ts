@@ -10,7 +10,6 @@ import {first} from "rxjs/operators";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
   form!: FormGroup;
   loading = false;
   submitted = false;
@@ -40,6 +39,9 @@ export class RegisterComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
+  /**
+   * On submit of the form, the form is validated and if valid, the user is registered
+   */
   onSubmit():void{
     this.submitted = true;
 
@@ -50,12 +52,13 @@ export class RegisterComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
     this.loading = true;
-    console.log(this.form.value);
+
+    // Register the user by calling register method of the auth service
     this.authService.register(this.form.value).pipe(first())
       .subscribe({
         next: () => {
+          // once registered, the user is redirected to the login page to login
           this.router.navigate(['/login'], { queryParams: {registered: true }});
         },
         error: error => {

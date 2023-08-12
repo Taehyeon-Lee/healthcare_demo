@@ -11,17 +11,6 @@ import {first} from "rxjs/operators";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-  // userPassword: string = '';
-  // userEmail: string = '';
-  //
-  // /**
-  //  * Constructor for the email system component
-  //  * @param http
-  //  */
-  // constructor(
-  //   private http: HttpClient
-  // ) {}
-
   form!: FormGroup;
   loading = false;
   submitted = false;
@@ -49,6 +38,9 @@ export class LoginComponent implements OnInit{
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
 
+  /**
+   * @description: This function is used to submit the login form
+   */
   onSubmit():void{
     this.submitted = true;
 
@@ -62,13 +54,13 @@ export class LoginComponent implements OnInit{
 
     this.loading = true;
 
+    // calling login function from auth Service and proceed to next step after successful login
     this.authService.login(this.f['username'].value, this.f['password'].value).pipe(first())
       .subscribe({
         next: () => {
           // get return url from query parameters or default to home page
-          const returnUrl = '/user/profile'; // this.route.snapshot.queryParams['returnUrl'] || '/';
+          const returnUrl = '/user/profile';
           this.router.navigateByUrl(returnUrl);
-          console.log(this.authService.userValue);
         },
         error: error => {
           this.error = error;

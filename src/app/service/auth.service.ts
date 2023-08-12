@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {User} from "./user.model";
-// import {AuthToken} from "./authtoken.model";
 import {Router} from "@angular/router";
 import {map} from "rxjs/operators";
 
+/**
+ * Authentication Service for login and logout and able other components to access the login user
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -23,19 +25,27 @@ export class AuthService {
 
   }
 
+  /**
+   * getter for the current user
+   */
   public get userValue() {
     return this.userSubject.value;
   }
 
-  // login(username: string, password: string): Observable<AuthToken> {
-  //   // Perform login API call and retrieve token
-  //   // Update loggedInUser and authToken properties
-  //   return this.http.post<AuthToken>('/api/login', {username, password});
 
+  /**
+   * Register a user
+   * @param user
+   */
   register(user: User){
     return this.http.post(`http://localhost:3000/registerUser`, user);
   }
 
+  /**
+   * Login a user
+   * @param username
+   * @param password
+   */
   login(username: string, password: string) {
     console.log(username);
     console.log(password);
@@ -49,13 +59,13 @@ export class AuthService {
         }));
   }
 
+  /**
+   * Logout a user
+   */
   logout(){
     // remove user from local storage and set cur user to null
     localStorage.removeItem('user');
     this.userSubject.next(null!);
     this.router.navigate(['/login']);
   }
-
-
-
 }

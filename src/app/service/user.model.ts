@@ -1,3 +1,6 @@
+/**
+ * User model
+ */
 export class User {
   uid?: string;
   u_name?: string;

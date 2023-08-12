@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
 import { User } from '../../service/user.model';
 
+/**
+ * Glucose Graph Component
+ */
 @Component({
   selector: 'glucose-line-graph',
   template: `
@@ -35,6 +38,9 @@ export class GlucoseGraphComponent implements OnInit {
     this.curUser = this.authService.userValue;
   }
 
+  /**
+   * On init, the chart data is updated with the data from the database
+   */
   ngOnInit() {
     // You can fetch your data and update the chart data here
     const url = 'http://localhost:3000/healthStats/' + this.curUser?.uid;
